@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ryukenz Hosting | Store Panel & SC</title>
+  <meta name="description" content="Ryukenz Hosting - Panel, Reseller, SC Bug, VPS. Elegant & Futuristic Store by Ryukenz Store." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #06060c;
+  --bg-card: rgba(18, 18, 30, 0.7);
+  --bg-card-hover: rgba(25, 25, 42, 0.85);
+  --border: rgba(120, 100, 255, 0.15);
+  --border-hover: rgba(120, 100, 255, 0.4);
+  --text: #e8e8f0;
+  --text-muted: #9898b0;
+  --accent: #7c6bff;
+  --accent-2: #00e5ff;
+  --accent-glow: rgba(124, 107, 255, 0.4);
+  --green: #00e676;
+  --orange: #ffab00;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --font: 'Inter', system-ui, sans-serif;
+  --font-display: 'Orbitron', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ===== BACKGROUND EFFECTS ===== */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(124, 107, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 107, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-glow {
+  position: fixed;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(124, 107, 255, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-glow-2 {
+  position: fixed;
+  bottom: 10%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 14px 0;
+  background: rgba(6, 6, 12, 0.75);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+}
+
+.logo-icon {
+  color: var(--accent-2);
+  font-size: 1.4rem;
+  filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.5));
+}
+
+.logo-text span {
+  color: var(--accent);
+  margin-left: 2px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+}
+
+.nav-links a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.25s;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 0.3s;
+  border-radius: 2px;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.btn-wa-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-wa-nav:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.menu-toggle span {
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background: rgba(10, 10, 18, 0.97);
+  backdrop-filter: blur(20px);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 99;
+  transform: translateY(-120%);
+  opacity: 0;
+  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 1px solid var(--border);
+}
+
+.mobile-menu.open {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.mobile-link {
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: 0.2s;
+}
+
+.mobile-link:hover {
+  background: rgba(124, 107, 255, 0.1);
+  color: var(--text);
+}
+
+.btn-wa-mobile {
+  margin-top: 12px;
+  text-align: center;
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: #fff;
+  padding: 12px;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  z-index: 1;
+  padding: 140px 0 80px;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 720px;
+}
+
+.badge-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 230, 118, 0.1);
+  border: 1px solid rgba(0, 230, 118, 0.3);
+  color: var(--green);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+}
+
+.pulse {
+  width: 8px;
+  height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.5); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 8px rgba(0, 230, 118, 0); }
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 1.15;
+  margin-bottom: 18px;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-2), var(--accent), #ff6bcb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), #5a4fd4);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 24px var(--accent-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px var(--accent-glow);
+}
+
+.btn-secondary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--border-hover);
+  color: var(--text);
+  padding: 13px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: 0.25s;
+}
+
+.btn-secondary:hover {
+  background: rgba(124, 107, 255, 0.1);
+  border-color: var(--accent);
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-2);
+  letter-spacing: 1px;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.stat-divider {
+  width: 1px;
+  height: 36px;
+  background: var(--border);
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  position: relative;
+  z-index: 1;
+  padding: 80px 0;
+}
+
+.section-alt {
+  background: linear-gradient(180deg, transparent, rgba(124, 107, 255, 0.03), transparent);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.section-desc {
+  color: var(--text-muted);
+  max-width: 480px;
+  margin: 0 auto;
+  font-size: 0.95rem;
+}
+
+/* ===== PRODUCT CARDS ===== */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.product-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  backdrop-filter: blur(12px);
+  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 40px rgba(124, 107, 255, 0.08);
+}
+
+.product-card.featured {
+  border-color: rgba(124, 107, 255, 0.35);
+  box-shadow: 0 0 30px rgba(124, 107, 255, 0.1);
+}
+
+.product-glow {
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(124, 107, 255, 0.15), transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.product-card:hover .product-glow {
+  opacity: 1;
+}
+
+.ribbon {
+  position: absolute;
+  top: 16px;
+  right: -30px;
+  background: linear-gradient(135deg, var(--accent), #5a4fd4);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 36px;
+  transform: rotate(45deg);
+}
+
+.product-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.product-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(124, 107, 255, 0.12);
+  border: 1px solid rgba(124, 107, 255, 0.25);
+  border-radius: 12px;
+  font-size: 1.3rem;
+  color: var(--accent-2);
+}
+
+.product-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--accent);
+  background: rgba(124, 107, 255, 0.12);
+  padding: 4px 10px;
+  border-radius: 50px;
+}
+
+.product-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.product-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  line-height: 1.55;
+}
+
+.product-price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.price-currency {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.price-amount {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent-2);
+  letter-spacing: 1px;
+}
+
+.btn-product {
+  display: block;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(124, 107, 255, 0.2), rgba(0, 229, 255, 0.1));
+  border: 1px solid rgba(124, 107, 255, 0.35);
+  color: var(--text);
+  padding: 12px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: 0.25s;
+}
+
+.btn-product:hover {
+  background: linear-gradient(135deg, var(--accent), #5a4fd4);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 6px 24px var(--accent-glow);
+}
+
+/* ===== APK CARDS ===== */
+.apk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.apk-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 22px;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  transition: 0.3s;
+}
+
+.apk-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+.apk-status {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 50px;
+}
+
+.apk-status.on {
+  background: rgba(0, 230, 118, 0.15);
+  color: var(--green);
+  border: 1px solid rgba(0, 230, 118, 0.3);
+}
+
+.apk-status.proses {
+  background: rgba(255, 171, 0, 0.15);
+  color: var(--orange);
+  border: 1px solid rgba(255, 171, 0, 0.3);
+}
+
+.apk-icon {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+}
+
+.apk-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.apk-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
+.btn-apk {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-2);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  padding: 8px 18px;
+  border-radius: 50px;
+  transition: 0.25s;
+}
+
+.btn-apk:hover {
+  background: rgba(0, 229, 255, 0.1);
+  border-color: var(--accent-2);
+}
+
+/* ===== CONTACT ===== */
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.contact-desc {
+  color: var(--text-muted);
+  margin: 12px 0 28px;
+  font-size: 0.95rem;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.contact-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(124, 107, 255, 0.1);
+  border: 1px solid rgba(124, 107, 255, 0.2);
+  border-radius: 12px;
+  font-size: 1.2rem;
+}
+
+.contact-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.contact-value {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.contact-value.link {
+  color: var(--accent-2);
+  transition: 0.2s;
+}
+
+.contact-value.link:hover {
+  text-decoration: underline;
+}
+
+.contact-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  text-align: center;
+  backdrop-filter: blur(12px);
+}
+
+.contact-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.contact-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+}
+
+.btn-wa-big {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: #fff;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: 0.25s;
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.3);
+}
+
+.btn-wa-big:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 32px rgba(37, 211, 102, 0.4);
+}
+
+.contact-note {
+  margin-top: 16px !important;
+  font-size: 0.8rem !important;
+  opacity: 0.7;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 32px 0;
+  text-align: center;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+}
+
+.footer-brand .logo-icon {
+  font-size: 1.1rem;
+}
+
+.footer-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.footer-sub {
+  font-size: 0.75rem;
+  color: rgba(152, 152, 176, 0.6);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .btn-wa-nav {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .hero {
+    padding: 120px 0 60px;
+  }
+
+  .hero-stats {
+    gap: 18px;
+  }
+
+  .stat-divider {
+    display: none;
+  }
+
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .section {
+    padding: 60px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Background effects -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+  <div class="bg-glow-2"></div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">◈</span>
+        <span class="logo-text">RYUKENZ<span>HOSTING</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#produk">Produk</a>
+        <a href="#apk">APK Bug</a>
+        <a href="#kontak">Kontak</a>
+      </nav>
+      <a href="https://wa.me/6283161496049" target="_blank" class="btn-wa-nav">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Order
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" class="mobile-link">Home</a>
+    <a href="#produk" class="mobile-link">Produk</a>
+    <a href="#apk" class="mobile-link">APK Bug</a>
+    <a href="#kontak" class="mobile-link">Kontak</a>
+    <a href="https://wa.me/6283161496049" target="_blank" class="btn-wa-mobile">Chat WhatsApp</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="container hero-content">
+      <div class="badge-live">
+        <span class="pulse"></span>
+        ONLINE STORE
+      </div>
+      <h1 class="hero-title">
+        <span class="gradient-text">Ryukenz</span> Hosting
+      </h1>
+      <p class="hero-subtitle">
+        Panel • Reseller • SC Bug • VPS<br />
+        Solusi hosting & tools premium dengan kualitas terbaik
+      </p>
+      <div class="hero-actions">
+        <a href="#produk" class="btn-primary">Lihat Produk</a>
+        <a href="https://wa.me/6283161496049" target="_blank" class="btn-secondary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Hubungi Admin
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">3+</span>
+          <span class="stat-label">Produk Panel</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">4</span>
+          <span class="stat-label">APK Bug</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">24/7</span>
+          <span class="stat-label">Support</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="section" id="produk">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">PRODUK UNGGULAN</span>
+        <h2 class="section-title">Panel & Script</h2>
+        <p class="section-desc">Pilih produk sesuai kebutuhanmu. Harga terjangkau, kualitas premium.</p>
+      </div>
+
+      <div class="products-grid">
+        <!-- Reseller Panel -->
+        <div class="product-card">
+          <div class="product-glow"></div>
+          <div class="product-header">
+            <div class="product-icon">◈</div>
+            <span class="product-badge">PANEL</span>
+          </div>
+          <h3 class="product-name">Reseller Panel</h3>
+          <p class="product-desc">Akses panel reseller untuk mengelola user & layanan hosting dengan mudah.</p>
+          <div class="product-price">
+            <span class="price-currency">Rp</span>
+            <span class="price-amount">5.000</span>
+          </div>
+          <a href="https://wa.me/6283161496049?text=Halo%20Admin%2C%20saya%20mau%20order%20*Reseller%20Panel*%20harga%20Rp%205.000" target="_blank" class="btn-product">
+            Order Sekarang
+          </a>
+        </div>
+
+        <!-- Admin Panel -->
+        <div class="product-card featured">
+          <div class="product-glow"></div>
+          <div class="ribbon">POPULER</div>
+          <div class="product-header">
+            <div class="product-icon">◆</div>
+            <span class="product-badge">PANEL</span>
+          </div>
+          <h3 class="product-name">Admin Panel</h3>
+          <p class="product-desc">Full control admin panel. Kelola seluruh sistem, user, dan resource dengan lengkap.</p>
+          <div class="product-price">
+            <span class="price-currency">Rp</span>
+            <span class="price-amount">7.000</span>
+          </div>
+          <a href="https://wa.me/6283161496049?text=Halo%20Admin%2C%20saya%20mau%20order%20*Admin%20Panel*%20harga%20Rp%207.000" target="_blank" class="btn-product">
+            Order Sekarang
+          </a>
+        </div>
+
+        <!-- SC Bug -->
+        <div class="product-card">
+          <div class="product-glow"></div>
+          <div class="product-header">
+            <div class="product-icon">⚡</div>
+            <span class="product-badge">SCRIPT</span>
+          </div>
+          <h3 class="product-name">SC Bug Fight4You Dahtre V1</h3>
+          <p class="product-desc">Script bug Fight4You Dahtre V1. Ready to use, update terbaru & stabil.</p>
+          <div class="product-price">
+            <span class="price-currency">Rp</span>
+            <span class="price-amount">15.000</span>
+          </div>
+          <a href="https://wa.me/6283161496049?text=Halo%20Admin%2C%20saya%20mau%20order%20*SC%20Bug%20Fight4You%20Dahtre%20V1*%20harga%20Rp%2015.000" target="_blank" class="btn-product">
+            Order Sekarang
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APK Bug Section -->
+  <section class="section section-alt" id="apk">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">APK BUG RYU</span>
+        <h2 class="section-title">APK Bug Tersedia</h2>
+        <p class="section-desc">Daftar APK bug yang tersedia di Ryukenz. Status update real-time.</p>
+      </div>
+
+      <div class="apk-grid">
+        <div class="apk-card">
+          <div class="apk-status on">ON</div>
+          <div class="apk-icon">📱</div>
+          <h3 class="apk-name">Fight4You Project</h3>
+          <p class="apk-desc">Status aktif & siap digunakan</p>
+          <a href="https://wa.me/6283161496049?text=Halo%20Admin%2C%20saya%20mau%20tanya%20*Fight4You%20Project*" target="_blank" class="btn-apk">Tanya Admin</a>
+        </div>
+
+        <div class="apk-card">
+          <div class="apk-status proses">PROSES</div>
+          <div class="apk-icon">📱</div>
+          <h3 class="apk-name">KILLER 4YOU</h3>
+          <p class="apk-desc">Sedang dalam proses update</p>
+          <a href="https://wa.me/6283161496049?text=Halo%20Admin%2C%20saya%20mau%20tanya%20*KILLER%204YOU*" target="_blank" class="btn-apk">Tanya Admin</a>
+        </div>
+
+        <div class="apk-card">
+          <div class="apk-status proses">PROSES</div>
+          <div class="apk-icon">📱</div>
+          <h3 class="apk-name">MANZTXRAT</h3>
+          <p class="apk-desc">Sedang dalam proses update</p>
+          <a href="https://wa.me/6283161496049?text=Halo%20Admin%2C%20saya%20mau%20tanya%20*MANZTXRAT*" target="_blank" class="btn-apk">Tanya Admin</a>
+        </div>
+
+        <div class="apk-card">
+          <div class="apk-status proses">PROSES</div>
+          <div class="apk-icon">📱</div>
+          <h3 class="apk-name">VOIDLAND2</h3>
+          <p class="apk-desc">Sedang dalam proses update</p>
+          <a href="https://wa.me/6283161496049?text=Halo%20Admin%2C%20saya%20mau%20tanya%20*VOIDLAND2*" target="_blank" class="btn-apk">Tanya Admin</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About / Contact -->
+  <section class="section" id="kontak">
+    <div class="container">
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <span class="section-tag">HUBUNGI KAMI</span>
+          <h2 class="section-title">Order & Support</h2>
+          <p class="contact-desc">
+            Butuh bantuan atau ingin order? Chat langsung ke admin via WhatsApp.  
+            Respon cepat & ramah.
+          </p>
+          <div class="contact-details">
+            <div class="contact-item">
+              <div class="contact-icon">👤</div>
+              <div>
+                <span class="contact-label">Developer</span>
+                <span class="contact-value">Ryukenz Store</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">💬</div>
+              <div>
+                <span class="contact-label">WhatsApp Admin</span>
+                <a href="https://wa.me/6283161496049" target="_blank" class="contact-value link">+62 831-6149-6049</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">✉️</div>
+              <div>
+                <span class="contact-label">Email</span>
+                <span class="contact-value">ryukenzstore</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <h3>Siap Order?</h3>
+          <p>Klik tombol di bawah untuk chat langsung ke admin WhatsApp.</p>
+          <a href="https://wa.me/6283161496049" target="_blank" class="btn-wa-big">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Chat WhatsApp
+          </a>
+          <p class="contact-note">Jam operasional: 24/7 (sesuai ketersediaan admin)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="logo-icon">◈</span>
+        <span>Ryukenz Hosting</span>
+      </div>
+      <p class="footer-text">© 2025 Ryukenz Store. All rights reserved.</p>
+      <p class="footer-sub">Panel • Reseller • SC Bug • VPS</p>
+    </div>
+  </footer>
+
+  <script>
+// Mobile menu toggle
+const menuToggle = document.getElementById('menuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+
+menuToggle.addEventListener('click', () => {
+  mobileMenu.classList.toggle('open');
+  menuToggle.classList.toggle('active');
+});
+
+// Close mobile menu when clicking a link
+document.querySelectorAll('.mobile-link').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    menuToggle.classList.remove('active');
+  });
+});
+
+// Smooth scroll offset for fixed navbar
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 70;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+
+  </script>
+</body>
+</html>
